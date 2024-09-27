@@ -1,0 +1,65 @@
+version: '3.9'
+
+services:
+  db:
+    image: postgres:15
+    container_name: db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+      - postgres_data_backups:/backups
+    env_file:
+      - .prod.env
+    ports:
+      - 5432:5432
+    networks:
+      - main
+    restart: always
+
+  web:
+    # Берем Dockerfile из каталога app
+    build: ./backend
+    # Запускаем тестовый сервер
+    command: /home/app/web/dev.sh
+    # куда будут помещены данные из каталога app
+    volumes:
+      - ./backend/:/home/app/web/
+      - ./backend/static:/home/app/web/static
+      - ./backend/media:/home/app/web/media
+    # Открываем порт 8000 внутри и снаружи
+    expose:
+      - 8000
+    # Файл содержащий переменные для контейнера
+    ports:
+      - 8000:8000
+    env_file:
+      - .prod.env
+    depends_on:
+      - db
+    networks:
+      - main
+    restart: always
+
+  nginx:
+    build: ./nginx
+    # Подключаем статические и медиа файлы
+    volumes:
+      - ./backend/static:/home/app/web/static
+      - ./backend/media:/home/app/web/media
+    ports:
+      - 1337:80
+    depends_on:
+      - web
+    networks:
+      - main
+    restart: always
+
+
+volumes:
+  static_volume:
+  media_volume:
+  postgres_data:
+  postgres_data_backups:
+
+networks:
+  main:
+    driver: bridge

@@ -1,0 +1,9 @@
+asgiref==3.8.1
+Django
+djangorestframework
+gunicorn==23.0.0
+numpy
+packaging==24.1
+psycopg2==2.9.9
+sqlparse==0.5.1
+tzdata==2024.1

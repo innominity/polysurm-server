@@ -1,0 +1,72 @@
+{
+    "max_drybulb_temp_winter": {
+        "label": "Макс. темп. по термометру, зима",
+        "lower": -45,
+        "upper": -1,
+        "sampling_input": true
+    },
+    "max_drybulb_temp_summer": {
+        "label": "Макс. темп. по термометру, лето",
+        "lower": 1,
+        "upper": 45,
+        "sampling_input": true
+    },
+    "wind_speed_winter": {
+        "label": "Скорость ветра, зима",
+        "lower": 0,
+        "upper": 40,
+        "sampling_input": true
+    },
+    "wind_speed_summer": {
+        "label": "Скорость ветра, лето",
+        "lower": 0,
+        "upper": 40,
+        "sampling_input": true
+    },
+    "sky_clearness_summer": {
+        "label": "Ясность неба, лето",
+        "lower": 0.0,
+        "upper": 1.1,
+        "sampling_input": true
+    },
+    "building_orientation": {
+        "label": "Ориентация здания отн. севера",
+        "lower": 0,
+        "upper": 359,
+        "sampling_input": true
+    },
+    "occupancy": {
+        "label": "Кол-во людей в жилом помещении",
+        "lower": 0,
+        "upper": 15,
+        "sampling_input": true
+    },
+    "lights": {
+        "label": "Уровень освещенности",
+        "lower": 1,
+        "upper": 1500,
+        "sampling_input": true
+    },
+    "gas_thickness": {
+        "label": "Толщина слоя газа между стеклами",
+        "lower": 0.001,
+        "upper": 0.1,
+        "sampling_input": true
+    },
+    "glazing_thickness": {
+        "label": "Толщина материала остекления",
+        "lower": 0.003,
+        "upper": 0.01,
+        "sampling_input": true
+    },
+    "glazing_conductivity": {
+        "label": "Теплопроводность материала остекления",
+        "lower": 0.1,
+        "upper": 5.0,
+        "sampling_input": true
+    },
+    "net_site_energy": {
+        "label": "Чистая энергия объекта",
+        "sampling_input": false
+    }
+}

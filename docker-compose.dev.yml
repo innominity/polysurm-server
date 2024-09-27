@@ -1,0 +1,48 @@
+version: '3.9'
+
+services:
+  db:
+    image: postgres:15
+    container_name: polysurm-db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+      - postgres_data_backups:/backups
+    env_file:
+      - .dev.env
+    ports:
+      - 5432:5432
+    networks:
+      - main
+
+  web:
+    # Берем Dockerfile из каталога app
+    build: ./backend
+    # Запускаем тестовый сервер
+    command: /home/app/web/dev.sh
+    # куда будут помещены данные из каталога app
+    volumes:
+      - ./backend/:/home/app/web/
+      - ./backend/static:/home/app/web/static
+      - ./backend/media:/home/app/web/media
+    # Открываем порт 8000 внутри и снаружи
+    expose:
+      - 8000
+    ports:
+      - 8000:8000
+    # Файл содержащий переменные для контейнера
+    env_file:
+      - .dev.env
+    depends_on:
+      - db
+    networks:
+      - main
+
+volumes:
+  static_volume:
+  media_volume:
+  postgres_data:
+  postgres_data_backups:
+
+networks:
+  main:
+    driver: bridge

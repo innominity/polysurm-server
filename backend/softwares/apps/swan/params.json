@@ -1,0 +1,22 @@
+{
+    "vel": {
+        "label": "Скорость ветра на высоте 10 м (м/с)",
+        "lower": 0,
+        "upper": 40,
+        "sampling_input": true
+    },
+    "hs_bay": {
+        "label": "Высота волны в заливе (м)",
+        "sampling_input": false
+    },
+    "hs_sea": {
+        "label": "Высота волны в море (м)",
+        "sampling_input": false
+    },
+    "dir": {
+        "label": "Направление ветра на высоте 10 м (в градусах)",
+        "lower": 0,
+        "upper": 360,
+        "sampling_input": true
+    }
+}

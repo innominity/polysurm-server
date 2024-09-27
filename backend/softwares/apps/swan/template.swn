@@ -1,0 +1,33 @@
+$***********MODEL INPUT*********************************
+SET NAUTical
+SET nor=-30
+MODE NONSTationary		
+COORDinates CARTesian
+$
+CGRID xpc={xp} ypc={yp} alpc=0. &
+      xlenc={xlen} ylenc={ylen} mxc={mx} myc={my} &
+      CIRcle mdc=36 flow=0.05 fhigh=1. msc=49
+
+INPgrid BOTtom xpinp=0 ypinp=0 alpinp=0. mxinp=83 myinp=58 & 
+        dxinp=250 dyinp=250 EXCeption -9
+READINP BOTTOM 1 'bathymetry\port_not_bathy_25m_vobst_exp.bot' IDLA= 1  FREE
+INIT PAR 0.05 7.7 177 30
+$************ BOUNDARY CONDITIONS *********************
+BOUnd SHAPespec JONswap 3.3 PEAK DSPR DEGRees
+BOUndspec SEGMENT IJ 0 30 30 30 CON PAR 0.1 2.0 200 30
+BOUndspec SEGMENT IJ 0 0 0 30 CON PAR 0.1 2.0 200 30
+
+$optline
+
+WIND {velocity} {direction}
+$************ OUTPUT REQUESTS *************************
+$
+OUTPUT OPTIONS '%' TABLE 16 BLOCK 6 84
+FRAME 'HRMSport' xpfr={xp} ypfr={yp} alpfr=0. xlenfr={xlen} ylenfr={ylen} mxfr={mx} myfr={my}
+BLOck 'HRMSport' NOHEADer '{fname}' LAYout 1 HSign OUTput 17761025.040000 1. HR
+GEN3
+TRIad
+FRiction
+DIFFRACtion SMNUM=9
+COMPUTE NONSTat 17761025.000000 15 MIn 17761025.040000
+STOP
